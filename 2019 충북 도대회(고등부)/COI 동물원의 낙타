@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+struct Animal {
+	int x;
+	int d;
+};
+
+int main()
+{
+	int num;
+	cin >> num;
+	vector<Animal> animal(num);
+		
+
+	for (int i = 0; i < num; i++)
+	{
+		cin >> animal[i].x >> animal[i].d;
+	}
+
+	for (int i = 0; i < num - 1; i++)
+	{
+		for (int j = i + 1; j < num; j++)
+		{
+			if ((animal[i].d) * (animal[j].d) < 0)
+			{
+				if (animal[i].x + animal[i].d == animal[j].x && animal[j].x + animal[j].d == animal[i].x)
+				{
+					cout << "YES";
+					return 0;
+				}
+			}
+		}
+	}
+	
+	cout << "NO";
+	return 0;
+}
