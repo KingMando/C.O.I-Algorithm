@@ -1,1 +1,62 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+struct ST {
+	int cpu;
+	int ram;
+	int disk;
+	int price;
+	int purchase; // 0이면 구매O, 1이면 구매X
+	int num;
+};
 
+bool cmp(ST a, ST b)
+{
+	if (a.price < b.price)
+		return true;
+	return false;
+}
+
+int main()
+{
+	int num;
+	cin >> num;
+	vector<ST> List_Notebook(num);
+
+
+	for (int i = 0; i < num; i++)
+	{
+		cin >> List_Notebook[i].cpu >> List_Notebook[i].ram >> List_Notebook[i].disk >> List_Notebook[i].price;
+		List_Notebook[i].num = i + 1;
+	}
+
+	for (int i = 0; i < num; i++)
+	{
+		for (int j = 0; j < num; j++)
+		{
+			if(i!=j)
+			{
+				if (List_Notebook[i].cpu < List_Notebook[j].cpu && List_Notebook[i].ram < List_Notebook[j].ram && List_Notebook[i].disk < List_Notebook[j].disk)
+				{
+					List_Notebook[i].purchase = 1;
+				}
+			}
+		}
+	}
+
+	sort(List_Notebook.begin(), List_Notebook.end(), cmp);
+	
+	cout << "\n";
+	for (int i = 0; i < num; i++)
+	{
+		if(List_Notebook[i].purchase==0)
+		{
+			cout << List_Notebook[i].num;
+			break;
+		}			
+	}
+
+
+	return 0;
+}
